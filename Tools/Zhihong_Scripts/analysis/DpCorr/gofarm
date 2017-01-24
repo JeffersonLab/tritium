@@ -1,0 +1,86 @@
+#!/bin/sh
+
+# Usage: farm_list
+#
+# This script creates batch_krun and jscript_krun in batch_files directory
+# and submits the job to the farms
+#
+# Feb. 22, 2011 Zhihong Ye
+#
+
+home=/work/halla/e08014/disk1/yez/DpCorr
+# home=$(PWD)     
+# The directory where replay_script is
+# Event you want to start with,gtotal=-1 means to replay all
+username=${USER}@jlab.org    # email which will be notify when the job is done
+#
+# Check whether the raw data are in cache or not
+#
+
+#
+# Function to check if input is an integer
+#
+is_integer() {
+ case $1 in
+  *[!0-9]*) return 1;;
+  *) return 0;;
+ esac
+}
+
+gin=$1
+gou=$2
+g1=$3
+g2=$4
+
+if ! [ -d batch_files ]
+	then 
+	echo "----------------------------------------------------------------"
+	echo "I need batch_files directory. I am going to create it"
+	echo  
+	mkdir batch_files
+    fi
+    
+#
+    echo
+#
+# Write file batch_krun
+#
+    rm -f batch_files/batch_${gin}_${g1}
+    echo "#!/bin/sh" > batch_files/batch_${gin}_${g1}
+    echo "cd " ${home}"/" >>batch_files/batch_${gin}_${g1}
+    echo " ">>batch_files/batch_${gin}_${g1}
+    echo "./DpCorr -I"${gin}" -F"${g1}" -L"${g2}>>batch_files/batch_${gin}_${g1}
+#  
+    chmod +x batch_files/batch_${gin}_${g1}
+    
+    echo "batch_files/batch_"${gin}_${g1}" has been created!"
+    echo " "
+    
+#
+# Write the jsub script
+#
+    rm -f batch_files/jscript_${gin}_${g1}
+    echo "PROJECT     e07006" > batch_files/jscript_${gin}_${g1}
+    echo "COMMAND     "$home"/batch_files/batch_"${gin}_${g1} >>batch_files/jscript_${gin}_${g1}
+    echo "JOBNAME     src.dpcorr_"${gin}_${g1} >>batch_files/jscript_${gin}_${g1}
+    echo "TRACK       analysis" >> batch_files/jscript_${gin}_${g1}
+    echo "TIME        4000" >>batch_files/jscript_${gin}_${g1}
+    echo "MEMORY      1800 MB" >>batch_files/jscript_${gin}_${g1}
+    echo "OS          linux" >>batch_files/jscript_${gin}_${g1}
+#    echo "MAIL:       "$username >>batch_files/jscript_${gin}_${g1}
+    
+    echo "batch_files/jscript_"${gin}_${g1}" has been created."
+    echo " " 
+    echo "Now, let us wait for the farms..."
+    echo " "
+#
+# Submit job to the farm
+ #  jsub batch_files/jscript_${gin}_${g1}
+#
+#
+    echo "Job "${gin}_${g1} "has been submited!"
+    echo
+    echo
+#
+    sleep 1
+    

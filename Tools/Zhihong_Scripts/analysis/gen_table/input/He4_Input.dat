@@ -1,0 +1,88 @@
+#############Debug Flags
+0              #IsDebug (default=false)
+0              #Enable energy loss (default=false)
+119.25         #HRS Length (HRS_L or HRS_R)  (cm)
+0.0            #D_x X offset(cm in TCS) between TCS and HCS
+0.0            #D_y Y offset(cm in TCS) between TCS and HCS
+-0.2668        #Beam X Center (cm), -0.02668 for x>2
+0.30220        #Beam Y Center (cm), 0.03022 for x>2
+0              #Enable QFS cross section model to replace XEMC, default=false
+0              #Enable Q2dep when Calculating Q.E. Peak  (QFS model, default=false, not used in XEMC)
+160.00000      #Fermi_Moment,fermi momentum of target(MeV) (QFS model,not used in XEMC)
+15.000000      #NIE,nucleon interaction energy(MeV), shift QE central value (QFS model,not used in XEMC)
+-5.50          #DEL_SEP,delta separation energy(MeV), shift delta central value (QFS model,not used in XEMC)
+3              #Which form factor: (QFS model,not used in XEMC)
+#                    1: Proton 2:He3 3:He4 4:deuterium 5: Point 6: Uniform 7: Gaussian 8: Exponential 
+#                    9: Shell 10: Hollow exponential 11: ...  12: Yukawa I 13: Yukawa II 
+#                   14: Hollow Gaussian 15: Generalized shell model 16: Modified exponential 
+#                   17: C/Fe/Pb (QFS model,not used in XEMC)
+1              #Internal Bremsstrahlung 0/1 Disable/Enable (Calculate Elastic Tail)
+1              #Peak approximation of Internal Bremsstrahlung 0/1 Disable/Enable (Calculate Elastic Tail)
+1              #External Bremsstrahlung 0/1 Disable/Enable (Calculate Elastic Tail)
+1              #Multiple-Photon Correction 0/1 Disable/Enable (Calculate Elastic Tail)
+0              #Enable raditive correction (default=true)
+5.0            #DeltaE (MeV) only for Quasielastic radiative correction
+1              #XEMC Model Flag, 1->QE+DIS, 2->QE only, 3->Dis only
+#############Target
+He4            #Name
+2              #Z: Atomic Number
+4.02602        #A: Atomic Weight(g/mol)
+0.6292         #T target thickness(g/cm^2)
+0.03146        #target density(g/cm^3) #With Boiling Effect at 95uA
+0.000000       #z0 target center(cm)
+20.00000       #T_L target length(cm)
+2.000000       #T_H target height(cm)
+Entrance       #Name for target cell
+13             #Z_i of initial window ( no zero )
+26.982         #A_i of initial window (g/mol) ( no zero )
+0.0736         #T_i target thickness of initial window(g/cm^2)
+2.700          #density of initial window(g/cm^3)
+Exit           #Name for target cell
+13             #Z_f of initial window ( no zero )
+26.982         #A_f of initial window (g/mol) ( no zero )
+0.0887         #T_f target thickness of initial window(g/cm^2)
+2.700          #density of final window(g/cm^3)
+0.0            #T_Theta target angle(deg) angle between beam and target(top view)
+0              #IsBump
+#############Windows Before Magnetic
+#At least two materials, 1st and last
+#For 1st material, need distance to TCS Origin
+#For the other, just length
+#For the rest between those materials, assume it's air
+Vacuum         #Name
+1              #Z: Atomic Number
+1.0            #: Atomic Weight(g/mol)
+51.75          #D: Distance to TCS Origin (cm)
+#L will be changed according to Target Block
+0.0            #density(g/cm^3)
+0.0            #Raditation Length(g/cm^2)
+Al             #Name
+13             #Z: Atomic Number
+26.982         #A: Atomic Weight(g/mol)
+3.048e-02      #L: Length (cm)
+2.70           #density(g/cm^3)
+24.01          #Raditation Length(g/cm^2)
+Kapton         #Name
+5              #Z: Atomic Number
+9.80           #A: Atomic Weight(g/mol)
+1.778e-02      #L: Length (cm)
+1.42           #density(g/cm^3)
+40.61          #Raditation Length(g/cm^2)
+-1             #End of this block
+#############Windows After Magnetic
+#Need all materials between Q3 exit and fp
+Titanium       #Name
+22             #Z: Atomic Number
+47.867         #A: Atomic Weight(g/mol)
+1.016e-02      #L: Length (cm)
+4.54           #density(g/cm^3)
+16.16          #Raditation Length(g/cm^2)
+Vacuum         #Name
+0              #Z: Atomic Number
+0.00           #A: Atomic Weight(g/mol)
+357.0          #L: Length (cm)
+0.00           #density(g/cm^3)
+0.00           #Raditation Length(g/cm^2)
+-1             #End of this block
+#############Final
+-1             #End of File

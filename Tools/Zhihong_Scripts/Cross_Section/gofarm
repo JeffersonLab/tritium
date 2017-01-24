@@ -1,0 +1,86 @@
+#!/bin/sh
+
+# Usage: farm_list
+#
+# This script creates batch_krun and jscript_krun in batch_files directory
+# and submits the job to the farms
+#
+# Feb. 22, 2011 Zhihong Ye
+#
+
+home=/work/halla/e08014/disk1/yez/Ep_Cross_Section
+# home=$(PWD)     
+# The directory where replay_script is
+# Event you want to start with,gtotal=-1 means to replay all
+username=${USER}@jlab.org    # email which will be notify when the job is done
+#
+# Check whether the raw data are in cache or not
+#
+
+#
+# Function to check if input is an integer
+#
+is_integer() {
+ case $1 in
+  *[!0-9]*) return 1;;
+  *) return 0;;
+ esac
+}
+
+gin=$1
+g1=$2
+com=$3
+ARM=$4
+
+if ! [ -d batch_files ]
+	then 
+	echo "----------------------------------------------------------------"
+	echo "I need batch_files directory. I am going to create it"
+	echo  
+	mkdir batch_files
+    fi
+    
+#
+    echo
+#
+# Write file batch_krun
+#
+    rm -f batch_files/batch_${gin}_${ARM}_${com}
+    echo "#!/bin/sh" > batch_files/batch_${gin}_${ARM}_${com}
+    echo "cd "${home}"/" >>batch_files/batch_${gin}_${ARM}_${com}
+    echo " ">>batch_files/batch_${gin}_${ARM}_${com}
+    echo "./Ep_Cross_Section -I"${ARM}"HRS/"${gin}" -L"${g1}" -C"${com}>>batch_files/batch_${gin}_${ARM}_${com}
+#  
+    chmod +x batch_files/batch_${gin}_${ARM}_${com}
+    
+    echo "batch_files/batch_"${gin}_${ARM}_${com}" has been created!"
+    echo " "
+    
+#
+# Write the jsub script
+#
+    rm -f batch_files/jscript_${gin}_${ARM}_${com}
+    echo "PROJECT     e07006" > batch_files/jscript_${gin}_${ARM}_${com}
+    echo "COMMAND     "$home"/batch/batch_files/batch_"${gin}_${ARM}_${com} >>batch_files/jscript_${gin}_${ARM}_${com}
+    echo "JOBNAME     xgt2_ep_"${gin}_${ARM}_${com} >>batch_files/jscript_${gin}_${ARM}_${com}
+    echo "TRACK       analysis" >> batch_files/jscript_${gin}_${ARM}_${com}
+    echo "TIME        1000" >>batch_files/jscript_${gin}_${ARM}_${com}
+    echo "MEMORY      700 MB" >>batch_files/jscript_${gin}_${ARM}_${com}
+    echo "OS          centos62" >>batch_files/jscript_${gin}_${ARM}_${com}
+#    echo "MAIL:       "$username >>batch_files/jscript_${gin}_${ARM}_${com}
+    
+    echo "batch_files/jscript_"${gin}_${ARM}_${com}" has been created."
+    echo " " 
+    echo "Now, let us wait for the farms..."
+    echo " "
+#
+# Submit job to the farm
+    jsub batch_files/jscript_${gin}_${ARM}_${com}
+#
+#
+    echo "Job "${gin}_${ARM}_${com} "has been submited!"
+    echo
+    echo
+#
+    sleep 1
+    

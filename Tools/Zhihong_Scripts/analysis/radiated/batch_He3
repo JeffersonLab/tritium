@@ -1,0 +1,5 @@
+#!/bin/sh
+./GenTable -THe3 -A21 -F0 -L51
+./GenTable -THe3 -A23 -F0 -L54
+./GenTable -THe3 -A25 -F0 -L83
+./GenTable -THe3 -A28 -F0 -L34

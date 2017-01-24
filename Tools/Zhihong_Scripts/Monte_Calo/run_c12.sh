@@ -1,0 +1,9 @@
+./gofarm_clean c12 3.1 0 1
+./gofarm_clean c12 3.2 0 1
+./gofarm_clean c12 4.1 0 1
+./gofarm_clean c12 4.2 0 1
+./gofarm_clean c12 5.0 0 1
+./gofarm_clean c12 5.1 0 1
+./gofarm_clean c12 5.2 0 1
+./gofarm_clean c12 5.05 0 1
+./gofarm_clean c12 6.5 0 1

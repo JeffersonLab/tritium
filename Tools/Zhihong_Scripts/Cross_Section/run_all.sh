@@ -1,0 +1,106 @@
+./gofarm xs_c12_kin3.1.dat c12L_kin3.1.log $1 L
+./gofarm xs_c12_kin3.11.dat c12L_kin3.11.log $1 L
+./gofarm xs_c12_kin3.12.dat c12L_kin3.12.log $1 L
+./gofarm xs_c12_kin3.2.dat c12L_kin3.2.log $1 L
+./gofarm xs_c12_kin4.1.dat c12L_kin4.1.log $1 L
+./gofarm xs_c12_kin4.2.dat c12L_kin4.2.log $1 L
+./gofarm xs_c12_kin5.0.dat c12L_kin5.0.log $1 L
+./gofarm xs_c12_kin5.0.dat.1st c12L1_kin5.0.log 1$1 L
+./gofarm xs_c12_kin5.0.dat.2nd c12L2_kin5.0.log 2$1 L
+./gofarm xs_c12_kin5.05.dat c12L_kin5.05.log $1 L
+./gofarm xs_c12_kin5.1.dat c12L_kin5.1.log $1 L
+./gofarm xs_c12_kin5.11.dat c12L_kin5.11.log $1 L
+./gofarm xs_c12_kin5.12.dat c12L_kin5.12.log $1 L
+./gofarm xs_c12_kin5.2.dat c12L_kin5.2.log $1 L
+./gofarm xs_c12_kin6.5.dat c12L_kin6.5.log $1 L
+
+./gofarm xs_c12_kin3.1.dat c12R_kin3.1.log $1 R
+./gofarm xs_c12_kin3.2.dat c12R_kin3.2.log $1 R
+./gofarm xs_c12_kin3.21.dat c12R_kin3.21.log $1 R
+./gofarm xs_c12_kin3.22.dat c12R_kin3.22.log $1 R
+./gofarm xs_c12_kin4.1.dat c12R_kin4.1.log $1 R
+./gofarm xs_c12_kin4.2.dat c12R_kin4.2.log $1 R
+./gofarm xs_c12_kin4.21.dat c12R_kin4.21.log $1 R
+./gofarm xs_c12_kin4.22.dat c12R_kin4.22.log $1 R
+./gofarm xs_c12_kin5.0.dat c12R_kin5.0.log $1 R
+./gofarm xs_c12_kin5.0.dat.1st c12R1_kin5.0.log 1$1 R
+./gofarm xs_c12_kin5.0.dat.2nd c12R2_kin5.0.log 2$1 R
+./gofarm xs_c12_kin5.05.dat c12R_kin5.05.log $1 R
+./gofarm xs_c12_kin5.1.dat c12R_kin5.1.log $1 R
+./gofarm xs_c12_kin5.11.dat c12R_kin5.11.log $1 R
+./gofarm xs_c12_kin5.12.dat c12R_kin5.12.log $1 R
+./gofarm xs_c12_kin5.2.dat c12R_kin5.2.log $1 R
+./gofarm xs_c12_kin6.5.dat c12R_kin6.5.log $1 R
+
+./gofarm xs_he3_kin3.1.dat he3L_kin3.1.log $1 L
+./gofarm xs_he3_kin3.2.dat he3L_kin3.2.log $1 L
+./gofarm xs_he3_kin4.1.dat he3L_kin4.1.log $1 L
+./gofarm xs_he3_kin4.2.dat he3L_kin4.2.log $1 L
+./gofarm xs_he3_kin5.0.dat he3L_kin5.0.log $1 L
+./gofarm xs_he3_kin5.05.dat he3L_kin5.05.log $1 L
+./gofarm xs_he3_kin5.1.dat he3L_kin5.1.log $1 L
+./gofarm xs_he3_kin5.2.dat he3L_kin5.2.log $1 L
+./gofarm xs_he3_kin5.21.dat he3L_kin5.21.log $1 L
+./gofarm xs_he3_kin5.22.dat he3L_kin5.22.log $1 L
+./gofarm xs_he3_kin6.5.dat he3L_kin6.5.log $1 L
+
+./gofarm xs_he3_kin3.2.dat he3R_kin3.2.log $1 R
+./gofarm xs_he3_kin4.1.dat he3R_kin4.1.log $1 R
+./gofarm xs_he3_kin4.2.dat he3R_kin4.2.log $1 R
+./gofarm xs_he3_kin5.0.dat he3R_kin5.0.log $1 R
+./gofarm xs_he3_kin5.05.dat he3R_kin5.05.log $1 R
+./gofarm xs_he3_kin5.1.dat he3R_kin5.1.log $1 R
+./gofarm xs_he3_kin5.2.dat he3R_kin5.2.log $1 R
+./gofarm xs_he3_kin5.21.dat he3R_kin5.21.log $1 R
+./gofarm xs_he3_kin5.22.dat he3R_kin5.22.log $1 R
+./gofarm xs_he3_kin6.5.dat he3R_kin6.5.log $1 R
+
+./gofarm xs_he4_kin3.1.dat he4L_kin3.1.log $1 L
+./gofarm xs_he4_kin3.2.dat he4L_kin3.2.log $1 L
+./gofarm xs_he4_kin4.2.dat he4L_kin4.2.log $1 L
+./gofarm xs_he4_kin5.0.dat he4L_kin5.0.log $1 L
+./gofarm xs_he4_kin5.1.dat he4L_kin5.1.log $1 L
+./gofarm xs_he4_kin5.2.dat he4L_kin5.2.log $1 L
+
+./gofarm xs_he4_kin3.1.dat he4R_kin3.1.log $1 R
+./gofarm xs_he4_kin3.2.dat he4R_kin3.2.log $1 R
+./gofarm xs_he4_kin4.2.dat he4R_kin4.2.log $1 R
+./gofarm xs_he4_kin5.0.dat he4R_kin5.0.log $1 R
+./gofarm xs_he4_kin5.1.dat he4R_kin5.1.log $1 R
+./gofarm xs_he4_kin5.2.dat he4R_kin5.2.log $1 R
+
+./gofarm xs_h2_kin3.1.dat h2L_kin3.1.log $1 L
+./gofarm xs_h2_kin5.0.dat h2L_kin5.0.log $1 L
+./gofarm xs_h2_kin5.1.dat h2L_kin5.1.log $1 L
+./gofarm xs_h2_kin3.1.dat h2R_kin3.1.log $1 R
+./gofarm xs_h2_kin5.0.dat h2R_kin5.0.log $1 R
+./gofarm xs_h2_kin5.1.dat h2R_kin5.1.log $1 R
+./gofarm xs_ca40_kin3.1.dat ca40L_kin3.1.log $1 L
+./gofarm xs_ca40_kin4.1.dat ca40L_kin4.1.log $1 L
+./gofarm xs_ca40_kin4.2.dat ca40L_kin4.2.log $1 L
+./gofarm xs_ca40_kin5.0.dat ca40L_kin5.0.log $1 L
+./gofarm xs_ca40_kin5.05.dat ca40L_kin5.05.log $1 L
+./gofarm xs_ca40_kin5.1.dat ca40L_kin5.1.log $1 L
+
+./gofarm xs_ca40_kin3.1.dat ca40R_kin3.1.log $1 R
+./gofarm xs_ca40_kin3.2.dat ca40R_kin3.2.log $1 R
+./gofarm xs_ca40_kin4.1.dat ca40R_kin4.1.log $1 R
+./gofarm xs_ca40_kin4.2.dat ca40R_kin4.2.log $1 R
+./gofarm xs_ca40_kin5.0.dat ca40R_kin5.0.log $1 R
+./gofarm xs_ca40_kin5.1.dat ca40R_kin5.1.log $1 R
+./gofarm xs_ca40_kin5.2.dat ca40R_kin5.2.log $1 R
+
+./gofarm xs_ca48_kin3.1.dat ca48L_kin3.1.log $1 L
+./gofarm xs_ca48_kin4.1.dat ca48L_kin4.1.log $1 L
+./gofarm xs_ca48_kin4.2.dat ca48L_kin4.2.log $1 L
+./gofarm xs_ca48_kin5.0.dat ca48L_kin5.0.log $1 L
+./gofarm xs_ca48_kin5.05.dat ca48L_kin5.05.log $1 L
+./gofarm xs_ca48_kin5.1.dat ca48L_kin5.1.log $1 L
+
+./gofarm xs_ca48_kin3.1.dat ca48R_kin3.1.log $1 R
+./gofarm xs_ca48_kin3.2.dat ca48R_kin3.2.log $1 R
+./gofarm xs_ca48_kin4.1.dat ca48R_kin4.1.log $1 R
+./gofarm xs_ca48_kin4.2.dat ca48R_kin4.2.log $1 R
+./gofarm xs_ca48_kin5.0.dat ca48R_kin5.0.log $1 R
+./gofarm xs_ca48_kin5.1.dat ca48R_kin5.1.log $1 R
+./gofarm xs_ca48_kin5.2.dat ca48R_kin5.2.log $1 R

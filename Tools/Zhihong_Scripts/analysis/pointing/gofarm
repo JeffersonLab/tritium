@@ -1,0 +1,70 @@
+#!/bin/sh
+
+# Usage: farm_list
+#
+# This script creates batch_arm and jscript_krun in batch_files directory
+# and submits the job to the farms
+#
+# Feb. 22, 2011 Zhihong Ye
+#
+home=/work/halla/e08014/disk1/yez/Dummy_Contain/
+#home=$(PWD)                    # The directory where replay_script is
+
+username=${USER}@jlab.org    # email which will be notify when the job is done
+
+#
+# Write the jsub script
+#
+  target=$1
+  nkin=$2
+  arm=$3
+  kin="kin"$2
+  bkin="Kin"$2
+
+  cd ${home}
+
+  if ! [ -d batch_files ]
+  then 
+	  echo "----------------------------------------------------------------"
+	  echo "	I need batch_files directory. I am going to create it"
+	  echo		
+	  mkdir batch_files
+  fi
+
+  rm -f batch_files/batch_${target}_${kin}_${arm}
+  echo "cd "${home} > batch_files/batch_${target}_${kin}_${arm}
+  echo "./Ep_Yield -I"${arm}"HRS/"${target}"_"${kin}".dat" >> batch_files/batch_${target}_${kin}_${arm}
+
+  chmod +x batch_files/batch_${target}_${kin}_${arm}
+
+  echo
+  echo "batch_files/batch_"${target}_${kin}_${arm}" has been created."
+  echo
+
+  rm -f batch_files/jscript_${target}_${kin}_${arm}
+  echo "PROJECT     e07006" > batch_files/jscript_${target}_${kin}_${arm}
+  echo "COMMAND     "$home"/batch_files/batch_"${target}_${kin}_${arm} >>batch_files/jscript_${target}_${kin}_${arm}
+  echo "JOBNAME     xgt2.dummy_"${target}_${kin}_${arm} >>batch_files/jscript_${target}_${kin}_${arm}
+  echo "TRACK       analysis" >> batch_files/jscript_${target}_${kin}_${arm}
+  echo "TIME        4000" >>batch_files/jscript_${target}_${kin}_${arm}
+  echo "MEMORY      1800 MB" >>batch_files/jscript_${target}_${kin}_${arm}
+  echo "OS          linux" >>batch_files/jscript_${target}_${kin}_${arm}
+
+  echo "batch_files/jscript_"${target}_${kin}_${arm}" has been created."
+  echo " " 
+  echo "Now, let us wait for the farms..."
+  echo " "
+  #
+  # Submit job to the farm
+  	  jsub batch_files/jscript_${target}_${kin}_${arm}
+  #
+  #
+  echo "Job "${target}_${kin}_$ar" has been submited!"
+  echo
+  echo
+  #
+  #sleep 2 
+
+  echo
+  echo "***** Good Bye and thank you for using the script *****"
+  echo

@@ -1,0 +1,16 @@
+#############Seeds
+0.12           #d(dp) dp full width
+0.18           #d(th) th full width (tan(thtg))
+0.09           #d(ph) th full width (tan(phtg))
+0              #Beam profile 0=normal distribution 1=gaussian distribution 2=norm+gaus
+0.500          #Raster X full size (cm)
+0.500          #Raster Y full size (cm)
+0.170          #Sigma of X if Beam profile == 1 or 2 (cm)
+0.170          #Sigma of Y if Beam profile == 1 or 2 (cm)
+-0.26680       #Beam X Center (cm)
+0.302200       #Beam Y Center (cm)
+0.000000       #z0 target center(cm) ???
+0.393700       #T_L target length(cm) 
+2.000000       #T_H target height(cm) 
+#############Final
+-1             #End of File

@@ -1,0 +1,91 @@
+#!/bin/sh
+
+# Usage: farm_list
+#
+# This script creates batch_krun and jscript_krun in batch_files directory
+# and submits the job to the farms
+#
+# Feb. 22, 2011 Zhihong Ye
+#
+
+# The directory where replay_script is
+home=/work/halla/e08014/disk1/yez/Gen_XS_Table
+# home=$(PWD)     
+username=${USER}@jlab.org    # email which will be notify when the job is done
+#
+# Check whether the raw data are in cache or not
+#
+
+#
+# Function to check if input is an integer
+#
+is_integer() {
+	case $1 in
+		*[!0-9]*) return 1;;
+		*) return 0;;
+	esac
+}
+
+tgt=$1
+ang=$2
+bin=$3
+
+if ! [ -d batch_files ]
+then 
+	echo "----------------------------------------------------------------"
+	echo "I need batch_files directory. I am going to create it"
+	echo  
+	mkdir batch_files
+fi
+
+#
+echo
+
+Count=0
+Count1=0
+Size=10
+while let "Count < bin" 
+do
+	#
+	# Write file batch_krun
+	#
+	let "Count1=Count+Size"
+	rm -f batch_files/batch_${tgt}_${ang}_${Count}
+	echo "#!/bin/sh" > batch_files/batch_${tgt}_${ang}_${Count}
+	echo "cd "${home}"/" >>batch_files/batch_${tgt}_${ang}_${Count}
+	echo "mv -f  ./"${tgt}"/XS_"${tgt}"_"${ang}"_"${Count}"_"${Count1}".table ./"${tgt}"/XS_"${tgt}"_"${ang}"_"${Count}"_"${Count1}".table.old" >>batch_files/batch_${tgt}_${ang}_${Count}
+	echo " ">>batch_files/batch_${tgt}_${ang}_${Count}
+	echo "./GenTable -T"${tgt}" -A"${ang}" -F"${Count}" -L"${Count1}>>batch_files/batch_${tgt}_${ang}_${Count}
+
+	#  
+	chmod +x batch_files/batch_${tgt}_${ang}_${Count}
+
+	echo "batch_files/batch_"${tgt}_${ang}_${Count}" has been created!"
+
+	#
+	# Write the jsub script
+	#
+	rm -f batch_files/jscript_${tgt}_${ang}_${Count}
+	echo "PROJECT     e07006" > batch_files/jscript_${tgt}_${ang}_${Count}
+	echo "COMMAND     "$home"/batch_files/batch_"${tgt}_${ang}_${Count} >>batch_files/jscript_${tgt}_${ang}_${Count}
+	echo "JOBNAME     xgt2.xstable_"${tgt}_${ang}_${Count} >>batch_files/jscript_${tgt}_${ang}_${Count}
+	echo "TRACK       analysis" >> batch_files/jscript_${tgt}_${ang}_${Count}
+	echo "TIME        600" >>batch_files/jscript_${tgt}_${ang}_${Count}
+	echo "MEMORY      500 MB" >>batch_files/jscript_${tgt}_${ang}_${Count}
+	echo "OS          centos65" >>batch_files/jscript_${tgt}_${ang}_${Count}
+	#    echo "MAIL:       "$username >>batch_files/jscript_${tgt}_${ang}_${Count}
+
+	echo "batch_files/jscript_"${tgt}_${ang}_${Count}" has been created."
+	echo "Now, let us wait for the farms..."
+	#
+	# Submit job to the farm
+	    jsub batch_files/jscript_${tgt}_${ang}_${Count}
+	#
+	#  
+	echo "Job "${tgt}_${ang}_${Count} "has been submited!"
+	echo
+	echo
+	#
+	let "Count=Count+Size"
+	sleep 1
+done   

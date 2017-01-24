@@ -1,0 +1,99 @@
+#!/bin/sh
+
+# Usage: farm_list
+#
+# This script creates batch_krun and jscript_krun in batch_files directory
+# and submits the job to the farms
+#
+# Feb. 22, 2011 Zhihong Ye
+#
+home=/work/halla/e08014/disk1/yez/Monte_Calo/SAMC/LHRS
+#home=$(PWD)                    # The directory where replay_script is
+
+username=${USER}@jlab.org    # email which will be notify when the job is done
+
+#
+# Write the jsub script
+#
+
+  target=$1
+  nkin=$2
+  krun=$3
+  kend=$4
+
+  kin="kin"$2
+  bkin="Kin"$2
+
+
+	cd ${home}"/"${bkin}
+    ln -sf ${home}"/New-Left" 
+	ln -sf ${home}"/New-Right"
+    ln -sf "/work/halla/e08014/disk1/yez/Monte_Calo/SAMC/SRC/SAMC"
+	if ! [ -d batch_files ]
+	   then 
+		echo "----------------------------------------------------------------"
+		echo "	I need batch_files directory. I am going to create it"
+		echo		
+		mkdir batch_files
+	fi
+
+	if ! [ -d ${target}_rootfiles ]
+		then
+		echo "-----------------------------------"
+		echo "creating "${target}"_rootfiles"
+		mkdir ${target}_rootfiles
+	fi
+  counter=0
+  while [ $counter -lt $kend ]; do
+	
+	if ! [ -d ${target}_run${krun} ]
+		then	
+		echo "------------------------------------"
+		echo "creating "${target}"_run"${krun}
+		mkdir ${target}_run${krun}
+	fi
+	  
+	rm -f batch_files/batch_${target}_${kin}_${krun}
+	echo "cd "${home}"/"${bkin}"/"${target}"_run"${krun} > batch_files/batch_${target}_${kin}_$krun
+	echo "ln -sf "${home}"/SAMC" >> batch_files/batch_${target}_${kin}_$krun
+	echo "cp -f  "${home}"/"${bkin}"/"${target}"_"${kin}".dat ." >>  batch_files/batch_${target}_${kin}_$krun
+	echo "./SAMC "${target}"_"${kin}".dat" >> batch_files/batch_${target}_${kin}_$krun
+
+	chmod +x batch_files/batch_${target}_${kin}_$krun
+
+	echo
+	echo "batch_files/batch_"${target}_${kin}_$krun" has been created."
+	echo
+
+	rm -f batch_files/jscript_${target}_${kin}_$krun
+	echo "PROJECT     e07006" > batch_files/jscript_${target}_${kin}_$krun
+	echo "COMMAND     "$home"/"${bkin}"/batch_files/batch_"${target}_${kin}_$krun >>batch_files/jscript_${target}_${kin}_$krun
+	echo "JOBNAME     src.samcL"${target}_${kin}_${krun} >>batch_files/jscript_${target}_${kin}_$krun
+	echo "TRACK       analysis" >> batch_files/jscript_${target}_${kin}_$krun
+	echo "TIME        2000" >>batch_files/jscript_${target}_${kin}_$krun
+	echo "MEMORY      1800 MB" >>batch_files/jscript_${target}_${kin}_$krun
+	echo "OS          linux" >>batch_files/jscript_${target}_${kin}_$krun
+	 # echo "MAIL:       "$username >>batch_files/jscript_$krun
+	# echo "INPUT_FILES:"$home"/replay/HRS.odef" >>batch_files/jscript_$krun
+  
+	echo "batch_files/jscript_"${target}_${kin}_${krun}" has been created."
+	echo " " 
+	echo "Now, let us wait for the farms..."
+	echo " "
+	#
+	# Submit job to the farm
+	jsub batch_files/jscript_${target}_${kin}_$krun
+	#
+	#
+	echo "Job "$krun "has been submited!"
+	echo
+	echo
+	#
+    let counter=counter+1
+	let krun=krun+1
+	#sleep 2 
+  done
+
+  echo
+  echo "***** Good Bye and thank you for using the script *****"
+  echo
