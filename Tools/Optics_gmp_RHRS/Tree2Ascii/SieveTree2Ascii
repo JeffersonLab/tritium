@@ -1,0 +1,33 @@
+#PROG=./Tree2Ascii
+#PROG=./tree2Ascii
+PROG=./tree2ascii
+
+ROOTFILES="/Users/tong/Tritium_analysis/optics/rootfiles"
+DIR="/Users/tong/Tritium_analysis/optics/Sieve"
+
+IdOffSet=49
+mv -f $DIR/Sieve.full.f22828  $DIR/Sieve.full.f22828.old
+
+Id=0
+$PROG   -pv -d SieveVars.def -O $Id\
+        -s $DIR/right_gmp_22828.root.SieveCut.ncut \
+        -c $DIR/right_gmp_22828.root.SieveCut.cut \
+        -g $DIR/right_gmp_22828.root.FullCut.root \
+        -o $DIR/Sieve.0.f22828 \
+        $ROOTFILES/right_gmp_22828.root \
+        $ROOTFILES/right_gmp_22829.root \
+        $ROOTFILES/right_gmp_22830.root \
+        $ROOTFILES/right_gmp_22831.root \
+        $ROOTFILES/right_gmp_22832.root \
+        $ROOTFILES/right_gmp_22833.root  
+#        $ROOTFILES/right_gmp_22834.root 
+
+       
+    
+cat  $DIR/Sieve.0.f22828 > $DIR/Sieve.full.f22828
+
+#./$DIR/trans $DIR/Sieve.full.f51
+
+#mv temp.dat $DIR/Sieve.full.f51
+
+echo "Done!"

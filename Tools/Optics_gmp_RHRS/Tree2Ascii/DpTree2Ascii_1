@@ -1,0 +1,58 @@
+ARCH=$(arch)
+
+PROG=./tree2ascii
+
+ROOTFILES="/Users/tong/Tritium_analysis/optics/rootfiles"
+DIR="/Users/tong/Tritium_analysis/optics/Dp_Fall"
+
+IdOffSet=1
+mv -f $DIR/Dp.full.f51  $DIR/Dp.full.f51.old
+
+Id=0
+$PROG -pv -d DpVars.def -O $Id -f 1.10e \
+        -s $DIR/right_gmp_22771.root.DpCut.ncut \
+        -c $DIR/right_gmp_22771.root.DpCut.cut \
+        -g $DIR/right_gmp_22771.root.FullCut.root \
+        -o $DIR/Dp.m4.f51 \
+        $ROOTFILES/right_gmp_22771.root 
+
+let "Id += $IdOffSet"
+$PROG -pv -d DpVars.def -O $Id -f 1.10e \
+        -s $DIR/right_gmp_22772.root.DpCut.ncut \
+        -c $DIR/right_gmp_22772.root.DpCut.cut \
+        -g $DIR/right_gmp_22772.root.FullCut.root \
+        -o $DIR/Dp.m2.f51 \
+        $ROOTFILES/right_gmp_22772.root 
+
+let "Id += $IdOffSet"
+$PROG -pv -d DpVars.def -O $Id -f 1.10e \
+        -s $DIR/right_gmp_22775.root.DpCut.ncut \
+        -c $DIR/right_gmp_22775.root.DpCut.cut \
+        -g $DIR/right_gmp_22775.root.FullCut.root \
+        -o $DIR/Dp.0.f51 \
+        $ROOTFILES/right_gmp_22775.root 
+
+let "Id += $IdOffSet"
+$PROG -pv -d DpVars.def -O $Id -f 1.10e \
+        -s $DIR/right_gmp_22776.root.DpCut.ncut \
+        -c $DIR/right_gmp_22776.root.DpCut.cut \
+        -g $DIR/right_gmp_22776.root.FullCut.root \
+        -o $DIR/Dp.p2.f51 \
+        $ROOTFILES/right_gmp_22776.root 
+
+let "Id += $IdOffSet"
+$PROG -pv -d DpVars.def -O $Id -f 1.10e \
+        -s $DIR/right_gmp_22778.root.DpCut.ncut \
+        -c $DIR/right_gmp_22778.root.DpCut.cut \
+        -g $DIR/right_gmp_22778.root.FullCut.root \
+        -o $DIR/Dp.p4.f51 \
+        $ROOTFILES/right_gmp_22778.root 
+
+cat  $DIR/Dp.m4.f51 > $DIR/Dp.full.f51
+cat  $DIR/Dp.m2.f51 >> $DIR/Dp.full.f51
+cat  $DIR/Dp.0.f51  >> $DIR/Dp.full.f51
+cat  $DIR/Dp.p2.f51 >> $DIR/Dp.full.f51
+cat  $DIR/Dp.p4.f51 >> $DIR/Dp.full.f51
+
+
+echo "Done!"
