@@ -7,7 +7,7 @@ PROGRAM = RateCal
 CFLAGS = $(shell $(ROOTSYS)/bin/root-config --cflags)
 LIBS   = $(shell $(ROOTSYS)/bin/root-config --libs)
 GLIBS  = $(shell $(ROOTSYS)/bin/root-config --glibs)
-XEMCDIR = /Users/yez/work/github/XEMC/SRC
+XEMCDIR = /work/halla/e08014/disk1/yez/XEMC/SRC
 
 CFLAGS += -Wall -g
 INCLUDE := -I${ROOTSYS}/include -I$(XEMCDIR)
@@ -22,10 +22,10 @@ ${XEMCDIR}/F1F209.o: ${XEMCDIR}/F1F209.f
 	cd ${XEMCDIR} ; $(GFORTRAN) $(FFLAGS) -c F1F209.f;
 
 $(PROGRAM): $(PROGRAM).o $(XEMCDIR)/F1F209.o
-	clang++ -o $(PROGRAM) $(PROGRAM).o $(CFLAGS) $(LIBS) $(RTLIBS) $(XEMCDIR)/F1F209.o 
+	g++ -o $(PROGRAM) $(PROGRAM).o $(CFLAGS) $(LIBS) $(RTLIBS) $(XEMCDIR)/F1F209.o 
 
 $(PROGRAM).o: $(PROGRAM).C
-	clang++ $(CFLAGS) -c -o $(PROGRAM).o $(PROGRAM).C ${INCLUDE}
+	g++ $(CFLAGS) -c -o $(PROGRAM).o $(PROGRAM).C ${INCLUDE}
 
 clean:
 	rm -f *.o ./SRC/*.o ${XEMCDIR}/*.o	
