@@ -1,5 +1,4 @@
 #define NOCASE 1
-
 /*C/C++ Includes{{{*/
 #include <stdio.h>
 #include <string>
@@ -44,7 +43,6 @@
 #include <TRandom3.h>
 //#include <TMatrix.h>
 /*}}}*/
-
 //*analyzer Includes{{{*/
 //#include <THaAnalysisObject.h>
 //#include <THaApparatus.h>
@@ -66,12 +64,11 @@
 #include <THaEvent.h>
 
 //*}}}*/
-
 using namespace std;
 
 /*Customization{{{*/
-const TString TRI_DIR="/work/halla/triton//yez/Cross_Sections/"; //this is for inputfiles,outfiles,logfiles
-const TString ROOTFILES_DIR="/volatile/halla/triton/Tritium_Rootfiles";     //this is for rootfiles
+const TString TRI_DIR="/work/halla/triton//yez/SRCs/Cross_Sections/"; //this is for inputfiles,outfiles,logfiles
+const TString ROOTFILES_DIR="/volatile/halla/triton/Tritium_Rootfiles/";     //this is for rootfiles
 const TString ROOTFILES_NAME = "tritium"; //such as tritium.root
 const TString SAMCFILES_DIR="/volatile/halla/tritium/yez/Monte_Calo/rootfiles/";    //this is for SAMC Rootfiles
 const TString XEMC_Table_Path="/work/halla/tritium/yez/Monte_Calo/Cross_Section_Tables/"; 

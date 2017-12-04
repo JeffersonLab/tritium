@@ -60,20 +60,20 @@ int CrossSection(const TString& aInputFile,const TString& aLogFile,const TString
 	Int_t RunNo=-1;
 	Int_t aline=0;
 	RunNo=gGet_InputFile_Var(aInputFileName,aline).Atoi(); aline++;
-	const TString Arm=gGet_InputFile_Var(aInputFileName,aline);aline++;                outlog << "   ARM = " << Arm <<endl;
-	const Double_t P=gGet_InputFile_Var(aInputFileName,aline).Atof();aline++;          outlog << "   P0 = " << P <<endl;
-	Double_t Angle=gGet_InputFile_Var(aInputFileName,aline).Atof();aline++;      outlog << "   Angle = " << Angle <<endl;
-	const TString Kin=gGet_InputFile_Var(aInputFileName,aline);aline++;                outlog << "   Kin = " << Kin<<endl;
-	const TString Target_Name=gGet_InputFile_Var(aInputFileName,aline);aline++;        outlog << "   Target Name = " << Target_Name<<endl;
-	Double_t Target_Thickness=gGet_InputFile_Var(aInputFileName,aline).Atof();aline++; outlog << Form("   Target Thickness = %f g/cm^2",Target_Thickness)<<endl; //check the unit! g/cm^2
+	const TString Arm=gGet_InputFile_Var(aInputFileName,aline);aline++;                outlog << "   ARM = " << Arm <<endl; cout << "   ARM = " << Arm <<endl;
+	const Double_t P=gGet_InputFile_Var(aInputFileName,aline).Atof();aline++;          outlog << "   P0 = " << P <<endl;  cout << "   P0 = " << P <<endl;
+	Double_t Angle=gGet_InputFile_Var(aInputFileName,aline).Atof();aline++;            outlog << "   Angle = " << Angle <<endl; cout << "   Angle = " << Angle <<endl;
+	const TString Kin=gGet_InputFile_Var(aInputFileName,aline);aline++;                outlog << "   Kin = " << Kin<<endl; cout << "   Kin = " << Kin<<endl;
+	const TString Target_Name=gGet_InputFile_Var(aInputFileName,aline);aline++;        outlog << "   Target Name = " << Target_Name<<endl; cout << "   Target Name = " << Target_Name<<endl;
+	Double_t Target_Thickness=gGet_InputFile_Var(aInputFileName,aline).Atof();aline++; outlog << Form("   Target Thickness = %f g/cm^2",Target_Thickness)<<endl; cout << Form("   Target Thickness = %f g/cm^2",Target_Thickness)<<endl; //check the unit! g/cm^2
 	const Double_t Target_Thickness_Stat_Err=gGet_InputFile_Var(aInputFileName,aline).Atof();aline++; //check the unit! g/cm^2
-	const Int_t Target_A=gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;      outlog << "   Target A = " << Target_A<<endl;
-	const Int_t Target_Z=gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;      outlog << "   Target Z = " << Target_Z<<endl;
-	const Bool_t IsExtTgt=gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;     outlog << "   Extended Target? " << IsExtTgt<<endl;
-	const Int_t Main_Trigger=gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;  outlog << "   Main Trigger " << Main_Trigger<<endl;
-	const TString S_Tree_Name=gGet_InputFile_Var(aInputFileName,aline);aline++;        outlog << "   Scaler Tree " << S_Tree_Name<<endl;
-	const TString AccBin_File=gGet_InputFile_Var(aInputFileName,aline);aline++;        outlog << "   AccBin File = " << AccBin_File<<endl;
-	const TString SAMC_File=gGet_InputFile_Var(aInputFileName,aline);aline++;          outlog << "   SAMC File = " << SAMC_File<<endl;
+	const Int_t Target_A=gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;      outlog << "   Target A = " << Target_A<<endl; cout << "   Target A = " << Target_A<<endl;
+	const Int_t Target_Z=gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;      outlog << "   Target Z = " << Target_Z<<endl;  cout << "   Target Z = " << Target_Z<<endl; 
+	const Bool_t IsExtTgt=gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;     outlog << "   Extended Target? " << IsExtTgt<<endl; cout << "   Extended Target? " << IsExtTgt<<endl;
+	const Int_t Main_Trigger=gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;  outlog << "   Main Trigger " << Main_Trigger<<endl; cout << "   Main Trigger " << Main_Trigger<<endl;
+	const TString S_Tree_Name=gGet_InputFile_Var(aInputFileName,aline);aline++;        outlog << "   Scaler Tree " << S_Tree_Name<<endl;  cout << "   Scaler Tree " << S_Tree_Name<<endl;
+	const TString AccBin_File=gGet_InputFile_Var(aInputFileName,aline);aline++;        outlog << "   AccBin File = " << AccBin_File<<endl;  cout << "   AccBin File = " << AccBin_File<<endl;
+	const TString SAMC_File=gGet_InputFile_Var(aInputFileName,aline);aline++;         outlog << "   SAMC File = " << SAMC_File<<endl;  cout << "   SAMC File = " << SAMC_File<<endl; 
 	const TString T_Tree_Name="T";
 	const TString E_Tree_Name="E";
 	D_Name.ReplaceAll("_N_",Arm.Data());
@@ -87,12 +87,17 @@ int CrossSection(const TString& aInputFile,const TString& aLogFile,const TString
 	const vector<Int_t> RunNoChain=gGet_RunNoChain(RunNo,gGet_InputFile_Var(aInputFileName,aline));aline++;	
 	const Int_t Chain_Size = RunNoChain.size();
 	int* RunChain = new int[Chain_Size];
-	for(int i=0;i<Chain_Size;i++)
+    cout<<Form("   List of %d Runs: ", Chain_Size);
+	for(int i=0;i<Chain_Size;i++){
 		RunChain[i] = RunNoChain[i];
+        cout<<"  "<<RunNoChain[i];
+    }
+    cout<<endl;
 
 	gCheckDirectory(Form("%s/results/%s",TRI_DIR.Data(),gGetScriptname(__FILE__).Data()));
-	const Bool_t bCheck_Data= gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++; outlog << "   Check Data? " << bCheck_Data<<endl;
-	const Bool_t bCal_XS = gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;    outlog << "   Calculate Cross Section? " << bCal_XS<<endl; 
+	const double Beam_Trip_Cut = gGet_InputFile_Var(aInputFileName,aline).Atof();aline++;   outlog << Form("   Beam Tip Cut = %6.2f uA",Beam_Trip_Cut)<<endl;  cout << Form("   Beam Tip Cut = %6.2f uA",Beam_Trip_Cut)<<endl;
+	const Bool_t bCheck_Data= gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++; outlog << "   Check Data? " << bCheck_Data<<endl;  cout << "   Check Data? " << bCheck_Data<<endl;
+	const Bool_t bCal_XS = gGet_InputFile_Var(aInputFileName,aline).Atoi();aline++;    outlog << "   Calculate Cross Section? " << bCal_XS<<endl;   cout << "   Calculate Cross Section? " << bCal_XS<<endl; 
 	/*}}}end of reading input*/
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// End of Initializing Input values
@@ -116,7 +121,7 @@ int CrossSection(const TString& aInputFile,const TString& aLogFile,const TString
 	// Check PreScalerR
 	//////////////////////////
 	/*Get PS{{{*/
-	outlog << endl << "@@@@@@ Checking and Storing PreScaler Factors for every run ..." <<endl;	
+	outlog << endl << "@@@@@@ Checking and Stor<<endling PreScaler Factors for every run ..." <<endl;	
 	cout   << endl << "@@@@@@ Checking and Storing PreScaler Factors for every run ..." <<endl;	
 	Int_t* PSChain = new int[Chain_Size*8];
 	gCheck_PS(RunNoChain,PSChain);
@@ -198,6 +203,9 @@ int CrossSection(const TString& aInputFile,const TString& aLogFile,const TString
 	Double_t* E0Chain = new double[Chain_Size]; //GeV
 	Double_t* dEEChain = new double[Chain_Size];//GeV
 	gCheck_E0(RunNoChain,Arm,E_Tree_Name,E0Chain, dEEChain); //Check P0 for each run from the Dipole readings. 
+    for(int i=0;i<Chain_Size;i++){
+        E0Chain[i]=Ebeam;//Will put the real values after pointing study, use the setting value for now
+    }
 
 	////////////////////////////////////////////
 	//Check Central Momentum and Store all P0
@@ -207,8 +215,10 @@ int CrossSection(const TString& aInputFile,const TString& aLogFile,const TString
 	Double_t* P0Chain = new double[Chain_Size];//GeV/c
 	gCheck_P0(RunNoChain,Arm,E_Tree_Name,P0Chain); //Check P0 for each run from the Dipole readings. 
 	Double_t P0_Avg = 0.0;
-	for(int i=0;i<Chain_Size;i++)
-		P0_Avg+=P0Chain[i];
+	for(int i=0;i<Chain_Size;i++){
+		P0Chain[i]=P;//Will put the real values after pointing study, use the setting value for now
+        P0_Avg+=P0Chain[i];
+    }
 	P0_Avg/=Chain_Size;
 
 	////////////////////////////////////////////
@@ -218,12 +228,11 @@ int CrossSection(const TString& aInputFile,const TString& aLogFile,const TString
 	cout    << endl<< "@@@@@@ Checking Scattering Angle for each run ..." <<endl; 
 	Double_t* AngleChain = new double[Chain_Size];//Degree
 	//gCheck_Angle(RunNoChain,Arm,E_Tree_Name,AngleChain); //Check P0 for each run from the Dipole readings. 
-	for(int i=0;i<Chain_Size;i++)
-		P0Chain[i]=Angle;//Will put the real values after pointing study, use the setting value for now
-	
     Double_t Angle_Avg = 0.0;
-	for(int i=0;i<Chain_Size;i++)
+	for(int i=0;i<Chain_Size;i++){
+		AngleChain[i]=Angle;//Will put the real values after pointing study, use the setting value for now
 		Angle_Avg+=AngleChain[i];
+    }
 	Angle_Avg/=Chain_Size;
 	/*}}}*/
 
@@ -247,6 +256,7 @@ int CrossSection(const TString& aInputFile,const TString& aLogFile,const TString
 	outlog <<"     Getting Electron Cuts for "<<Target_Name <<" Run = "<<RunNo <<" on "<<Arm<<" Arm, from "<< AccCut_FileName.Data() <<endl; 
 	cout   <<"     Getting Electron Cuts for "<<Target_Name <<" Run = "<<RunNo <<" on "<<Arm<<" Arm, from "<< AccCut_FileName.Data() <<endl; 
 	ElectronCuts = gGet_TRI_Cut(RunNo,Arm,Target_Name.Data(),Kin.Data(),Angle_Avg,P,Main_Trigger,AccCut_FileName,IsExtTgt, &Target_Length_Cut); 
+	ElectronCuts="1";
 	outlog <<"--------------------------------------------------------------------------------------"<<endl;
 	cout <<"--------------------------------------------------------------------------------------"<<endl;
 	outlog <<"     --> "<<ElectronCuts.Data()<<endl;

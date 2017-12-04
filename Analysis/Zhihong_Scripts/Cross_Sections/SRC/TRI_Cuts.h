@@ -28,7 +28,7 @@ inline TString gGet_TRI_Cut(const Int_t& aRunNo,const TString& aArm,const TStrin
         aCer_Cuts = 50.0;    // Cer Cuts
         aY_Offset = 0.0;
 
-        Trigger_Cut = Form("%s.edtpl[0]==0&&((%s.evtypebits>>%d)&1)",D_Name.Data(),D_Name.Data(),aMain_Trigger);
+        Trigger_Cut = Form("((%s.evtypebits>>%d)&1)",D_Name.Data(),aMain_Trigger);
         Bool_t bFind=kFALSE; 
         //Search the Cut Table
         ifstream InCut(aAccCut_FileName.Data());
@@ -100,7 +100,7 @@ inline TString gGet_TRI_Cut(const Int_t& aRunNo,const TString& aArm,const TStrin
             aY_Offset = 0.0;
 
             //I assume we alway care about Trigger 1 and 3, not 6&7, which is danger but OK so far.
-            Trigger_Cut = Form("%s.edtpl[0]==0&&((%s.evtypebits>>%d)&1)",D_Name.Data(),D_Name.Data(),aMain_Trigger);
+            Trigger_Cut = Form("((%s.evtypebits>>%d)&1)",D_Name.Data(),aMain_Trigger);
             Bool_t bFind=kFALSE; 
             //Search the Cut Table
             ifstream InCut(aAccCut_FileName.Data());

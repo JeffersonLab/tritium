@@ -305,7 +305,7 @@ inline Double_t gCal_Simple_Error(map <Double_t,Double_t>& aX,const Double_t& aY
 inline vector<Int_t> gGet_RunNoChain(const Int_t& aRunNo,const TString& aString)
 {
 	vector<Int_t> output;
-	if(aRunNo>1000)
+	if(aRunNo>10)
 		output.push_back(aRunNo);
 	vector<TString> input=Tokens(aString);
 	unsigned int i;
