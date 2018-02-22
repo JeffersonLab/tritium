@@ -1,0 +1,4 @@
+#!/bin/sh
+cd /work/halla/triton/yez/get_yield/
+ 
+./New_Yield H3_kin5.dat

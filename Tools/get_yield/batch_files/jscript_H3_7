@@ -1,0 +1,7 @@
+PROJECT     triton
+COMMAND     /work/halla/triton/yez/get_yield/batch_files/batch_H3_7
+JOBNAME     xs_H3_7
+TRACK       analysis
+TIME        2000
+MEMORY      4000 MB
+OS          centos7

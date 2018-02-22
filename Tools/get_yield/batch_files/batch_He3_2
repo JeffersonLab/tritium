@@ -1,0 +1,4 @@
+#!/bin/sh
+cd /work/halla/triton/yez/get_yield/
+ 
+./New_Yield He3_kin2.dat

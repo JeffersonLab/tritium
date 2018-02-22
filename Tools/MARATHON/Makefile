@@ -3,10 +3,10 @@
 # Zhihong Ye, 01/09/2009
 #-------------------------------------------
 
-#PROGRAM = XSCheck
+PROGRAM = XSCheck
 #PROGRAM = F2Check
 #PROGRAM = Check_XS
-PROGRAM = CheckRate
+#PROGRAM = CheckRate
 #PROGRAM = RateCal
 
 CFLAGS = $(shell $(ROOTSYS)/bin/root-config --cflags)

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+### This script is used to submit jasmine request to jcache rawdata from silo to cache
+### Zhihong Ye Sep. 20 2009
+
+RAWDIR=/mss/halla/triton/raw
+#
+# Ask for file name
+#
+
+krun=1000
+kend=3000
+while [ $krun -lt $kend ]; do
+    COUNT=0
+    if [ -e $RAWDIR"/triton_"$krun".dat."$COUNT ]; then
+	echo $krun >> xgt2_run.dat
+	echo " Next ..."
+    else
+	jcache get  $RAWDIR"/triton_"$krun".dat."$COUNT
+	echo "        Missing raw data of run# "$krun
+	echo $krun >> scan_xgt2_run.dat
+    fi
+    let krun=krun+1
+done
+
+echo "All Requests have been submited!"

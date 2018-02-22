@@ -1,0 +1,7 @@
+PROJECT     triton
+COMMAND     /work/halla/triton/MARATHON_Replay//batch_farm/batch_files/batch_90839
+JOBNAME     H3.analysis90839
+TRACK       analysis
+TIME        4000
+MEMORY      1800 MB
+OS          centos7

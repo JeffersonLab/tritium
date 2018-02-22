@@ -1,0 +1,4 @@
+#!/bin/bash
+RUNNUM=$1
+source /work/halla/triton/MARATHON_Replay/sourceme.sh
+analyzer rootlogon.C -q -d 'replay_tritium.C('${RUNNUM}',-1,0,kTRUE,kFALSE,kFALSE)'

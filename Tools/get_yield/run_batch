@@ -1,0 +1,31 @@
+#!/bin/bash
+./gofarm H1 1
+./gofarm H1 2
+./gofarm H1 3
+
+./gofarm D2 1
+./gofarm D2 2
+./gofarm D2 3
+./gofarm D2 5
+./gofarm D2 7
+./gofarm D2 9
+./gofarm D2 11
+./gofarm D2 13
+
+./gofarm H3 1
+./gofarm H3 2
+./gofarm H3 3
+./gofarm H3 5
+./gofarm H3 7
+./gofarm H3 9
+./gofarm H3 11
+./gofarm H3 13
+
+./gofarm He3 1
+./gofarm He3 2
+./gofarm He3 3
+./gofarm He3 5
+./gofarm He3 7
+./gofarm He3 9
+./gofarm He3 11
+./gofarm He3 13

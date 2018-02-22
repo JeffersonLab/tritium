@@ -1,0 +1,5 @@
+#!/bin/sh
+cd  /work/halla/triton/MARATHON_Replay//replay
+rm -f ./Rootfiles/triton_90838*.root
+ 
+./fullReplay 90838
